@@ -1,17 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, text } from 'react-native';
 
 export default function App() {
   
   const [text, setText] = useState('')
-  
+  const [list, setList] = useState([])
+
   function addBtnPressed(){
-    console.log("Du skrev noget: " +text)
+    setList([...list, text])
+    
+    console.log(list)
 
     //TODO: Gem teksten i en liste
   }
-
 
   return (
     <View style={styles.container}>
