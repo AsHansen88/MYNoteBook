@@ -1,10 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
+  
+  const [text, setText] = useState('')
+  
+  function addBtnPressed(){
+    console.log("Du skrev noget: " +text)
+
+    //TODO: Gem teksten i en liste
+  }
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <TextInput placeholder='My note' onChange={(txt)=>setText(txt)}></TextInput>
+      <Button title ='Add' onPress={addBtnPressed}></Button>
       <StatusBar style="auto" />
     </View>
   );
