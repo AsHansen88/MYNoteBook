@@ -18,7 +18,28 @@ export default function Notes ({notes}) {
   
 };
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    padding: 10,
+
+  },
+
+  title: {
+    fontSize: 30,
+    fontWeight: "700",
+    borderWidth: 4,
+    borderRadius: 10,
+    borderColor: "#f5f5f5",
+    padding: 10,
+
+
+  }
+
+})
 
 
   
