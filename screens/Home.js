@@ -10,7 +10,7 @@ const Home = ({onExit}) => {
       <Text>Add New note</Text>
       </View>
       </Pressable>
-      <Pressable onPress={()=>onExit(ScreenType.addNotes)}>
+      <Pressable onPress={()=>onExit(ScreenType.allNotes)}>
       <View style = {styles.itemButton}> 
 <Text>View All Note</Text>
       </View>
