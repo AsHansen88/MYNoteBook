@@ -1,20 +1,46 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from './screens/Home';
-import Notes from './screens/Notes';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { StyleSheet, Text, View } from "react-native-web";
+import Header from './components/Header';
+import Home from "./screens/Home";
+import { ScreenType } from "./constants/constants";
+import AddNotes from "./screens/AddNotes";
+import BackButton from "./components/BackButton";
 
-const Stack = createStackNavigator();
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" headerMode="none">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="AddNote" component={Notes} />
-      </Stack.Navigator>
-    </NavigationContainer>
+export default function App() {
+ 
+  const [screen, setScreen] = useState(ScreenType.home);
+  const [notes, setNotes] = useState([]);
+  let contant;
+  if(screen===ScreenType.container){
+    contant = <AddNotes onSave = {(data) => setNotes([...notes, {id:Date.now(), note: data}])}/>
+  }else if(screen===ScreenType.allNotes){
+    contant = <Notes />;
+  }else if (screen===ScreenType.home){
+    contant = <Home onExit={(data) => {setScreen(data)}} />
+  }
+
+  console.log(notes);
+
+  return(
+ <View style = {styles.container}>
+  <Header />
+  <BackButton onButtonClick={(data) => setScreen(data)} />
+  {contant}
+ 
+    <StatusBar styles="auto" />
+
+  </View>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    
+    
+  },
+
+})

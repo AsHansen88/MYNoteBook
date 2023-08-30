@@ -1,41 +1,41 @@
-import React, { useState } from 'react';
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { ScreenType } from '../constants/constants'
 
-const Home = ({ navigation }) => {
-  const [notes, setNotes] = useState([]);
-
-  const renderItem = ({ item }) => <Text style={styles.noteItem}>{item}</Text>;
-
+const Home = ({onExit}) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>My Notes</Text>
-      <FlatList
-        data={notes}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-      <Button
-        title="Add Note"
-        onPress={() => navigation.navigate('AddNote', { setNotes })}
-      />
-    </View>
-  );
-};
+    <View style = {styles.container}>
+      <Pressable onPress={()=>onExit(ScreenType.addNotes)}>
+      <View style = {styles.itemButton}>
+      <Text>Add New note</Text>
+      </View>
+      </Pressable>
+      <Pressable onPress={()=>onExit(ScreenType.addNotes)}>
+      <View style = {styles.itemButton}> 
+<Text>View All Note</Text>
+      </View>
+      </Pressable>
+      </View>
+  )
+}
+
+export default Home
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  noteItem: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
-});
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    marginTop: 40,
 
-export default Home;
+  },
+  itemButton: { 
+    width: Dimensions.get("window").height - 100,
+    height: "50%",
+    marginVertical: 30,
+    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
+    alignItems:'center',
+
+  },
+})
