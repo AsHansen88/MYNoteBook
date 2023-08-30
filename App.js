@@ -1,34 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, text } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './screens/Home';
+import Notes from './screens/Notes';
 
-export default function App() {
-  
-  const [text, setText] = useState('')
-  const [list, setList] = useState([])
+const Stack = createStackNavigator();
 
-  function addBtnPressed(){
-    setList([...list, text])
-    
-    console.log(list)
-
-    //TODO: Gem teksten i en liste
-  }
-
+const App = () => {
   return (
-    <View style={styles.container}>
-      <TextInput placeholder='My note' onChange={(txt)=>setText(txt)}></TextInput>
-      <Button title ='Add' onPress={addBtnPressed}></Button>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="AddNote" component={Notes} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
